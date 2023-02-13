@@ -26,9 +26,7 @@ def handle_threads(port):
         while True:
             conn, addr = s.accept()
             with conn:
-
                 current_time = time.localtime()
-
                 logging.info("{}", format(current_time))
                 logging.info("Connected by {}".format(addr))
                 print("{} - Connected by {}".format(current_time, addr))
