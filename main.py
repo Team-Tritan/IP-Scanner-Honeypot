@@ -7,9 +7,13 @@ logging.basicConfig(filename="requests.log", level=logging.INFO)
 
 
 def create_listeners(first, last):
-    for i in range(first, last):
-        t = threading.Thread(target=handle_threads, args=(i,))
-        t.start()
+    try:
+        for i in range(first, last):
+            t = threading.Thread(target=handle_threads, args=(i,))
+            t.start()
+    except Exception as e:
+        print("Error creating thread for {}".format(i), e)
+        return
 
 
 def handle_threads(port):
