@@ -26,42 +26,22 @@ def handle_threads(port):
             conn, addr = s.accept()
             with conn:
                 current_time = time.localtime()
-                logging.info("{}", format(current_time))
+                logging.info("{}".format(current_time))
                 logging.info("Connected by {}".format(addr))
                 print("{} - Connected by {}".format(current_time, addr))
                 while True:
                     data = conn.recv(1024)
                     if not data:
                         break
-                    logging.info("{}", format(current_time))
+                    logging.info("{}".format(current_time))
                     logging.info("Received data: {}".format(data.decode()))
                     print("Received data: {}".format(data.decode()))
-                    conn.sendall({"status": "gigachad server"}.encode())
+                    conn.send(b"fuck you chinese heckers!")
 
     except Exception as e:
-        print("Closing socket due to error", e)
-        s.close()
-
-    except KeyboardInterrupt:
-        print("Closing socket due to keyboard interrupt")
-        s.close()
-
-    except SystemExit:
-        print("Closing socket due to system exit")
-        s.close()
-
-    except BaseException:
-        print("Closing socket due to base exception")
-        s.close()
-
-    except:
-        print("Closing socket due to unknown error")
-        s.close()
-
-    finally:
-        print("Closing socket due to final")
-        s.close()
+        print("Error in thread {}".format(port), e)
+        return
 
 
 if __name__ == "__main__":
-    create_listeners(80, 443)
+    create_listeners(80, 65535)
