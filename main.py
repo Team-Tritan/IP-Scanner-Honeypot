@@ -21,7 +21,6 @@ def handle_threads(port):
     except Exception as e:
         print("Error binding to port {}".format(port), e)
         return
-
     try:
         while True:
             conn, addr = s.accept()
@@ -37,6 +36,7 @@ def handle_threads(port):
                     logging.info("{}", format(current_time))
                     logging.info("Received data: {}".format(data.decode()))
                     print("Received data: {}".format(data.decode()))
+                    conn.sendall({"status": "gigachad server"}.encode())
 
     except Exception as e:
         print("Closing socket due to error", e)
